@@ -11,8 +11,8 @@ mysqli_set_charset($conn, "utf8");
 // Register
 if (isset($_POST['register'])) {
     $name = trim($_POST['name']);
-    $password = trim($_POST['password']);
-    $rePassword = trim($_POST['rePassword']);
+    $password = md5(trim($_POST['password']));
+    $rePassword = md5(trim($_POST['rePassword']));
     $email = trim($_POST['email']);
     $phoneNumber = trim($_Post['phoneNumber']);
 
@@ -61,7 +61,7 @@ if (isset($_POST['register'])) {
 if (isset($_POST['login'])) {
 
     $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    $password = md5(trim($_POST['password']));
 
 
     if (empty($email)) {

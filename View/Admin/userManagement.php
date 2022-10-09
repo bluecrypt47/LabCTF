@@ -65,6 +65,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone Number</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Update at</th>
                                     <th scope="col">Activity</th>
                                 </tr>
@@ -82,8 +83,13 @@
                                         <td><?php echo $user['name']; ?></td>
                                         <td><?php echo $user['email']; ?></td>
                                         <td><?php echo $phoneNumber ?></td>
+                                        <td><?php if ($user['roles'] == 0) {
+                                                echo 'Admin';
+                                            } else {
+                                                echo 'User';
+                                            } ?></td>
                                         <td><?php echo $user['updateDate']; ?></td>
-                                        <td><a class="btn btn-info" href=" #">View</a>
+                                        <td><a class="btn btn-info" href="updateUser.php?id=<?php echo $user['id']; ?>">View</a>
                                             <a class="btn btn-danger" href="#">Delete</a>
                                         </td>
                                     </tr>

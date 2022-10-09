@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Change Password</title>
+    <title>User Detail</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,85 +41,64 @@
                 <?php require 'D:\DVWA\ProjectCTF\View\Layout\header.php'; ?>
                 <!-- End of Topbar -->
 
+                <?php
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+
+                    $sql = "SELECT * FROM users WHERE id=$id";
+                    $result = mysqli_query($conn, $sql);
+
+                    $userObject = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                }
+                ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    <!-- <?php foreach ($userObject as $user) : ?> -->
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Change Password</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Profile of <?php echo $user['name']; ?></h1>
                     </div>
-
-                    <?php
-                    $email = $_SESSION['email'];
-
-                    $sql = "SELECT * FROM users WHERE email='$email'";
-                    $result = mysqli_query($conn, $sql);
-                    $user = mysqli_fetch_assoc($result);
-
-                    if (isset($user['id'])) {
-                        // Update profile
-                        if (isset($_REQUEST['changePassword'])) {
-                            $idUser = $user['id'];
-                            $currentPassword = md5(trim($_POST['currentPassword']));
-                            $newPassword = md5(trim($_POST['newPassword']));
-                            $reNewPassword = md5(trim($_POST['reNewPassword']));
-
-                            if (!empty($currentPassword) && !empty($newPassword) && !empty($reNewPassword)) {
-                                if ($reNewPassword != $newPassword) {
-                                    echo '<div class="alert alert-danger">
-                                        Repeat new password incorrect!
-                                    </div>';
-                                } else if ($currentPassword != $user['password']) {
-                                    echo '<div class="alert alert-danger">
-                                        Current password incorrect!
-                                    </div>';
-                                } else {
-                                    $update = "UPDATE users SET password='$newPassword' WHERE id='$idUser'";
-                                    $result = mysqli_query($conn, $update);
-                                    echo '<script language="javascript">alert("Change password Successfully!"); window.location="logout.php";</script>';
-                                }
-                            } else {
-                                echo '<div class="alert alert-danger">
-                                        Not required!
-                                    </div>';
-                            }
-                        }
-                    }
-
-                    ?>
-
-                    <!-- Begin Page Content -->
-
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="changePassword.php" class="user">
+                                        <form method="post" action="profile.php" class="user">
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="currentPassword" aria-describedby="emailHelp" placeholder="Enter Current Password...">
+                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="newPassword" placeholder="Enter New Password...">
+                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" name="reNewPassword" placeholder="Enter Repeat New Password...">
+                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-select form-select-user" aria-label="Default select example">
+                                                    <?php if ($user['roles'] == 0) { ?>
+                                                        <option selected value="<?php $user['roles'] ?>">Admin</option>
+                                                        <option value="1">User</option>
+                                                    <?php } else { ?>
+                                                        <option value="0">Admin</option>
+                                                        <option selected value="<?php $user['roles'] ?>">User</option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="changePassword" value="Change Password" class="btn btn-primary btn-user btn-block" />
+                                            <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- <?php endforeach; ?> -->
                     <div>
-                        <a class="btn btn-success" href="index.php">Back</a>
+                        <a class="btn btn-success" href="userManagement.php">Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
