@@ -113,7 +113,7 @@
                         </table>
 
                         <div>
-                            <a class="btn btn-success" href="index.php"><i class="fas fa-caret-left"></i> Back</a>
+                            <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
                         </div>
 
                     </div>

@@ -89,7 +89,7 @@
                                                 <p>Are you sure you want to delete this User?</p><br>
                                                 <p>
                                                     <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-                                                    <a href="userManagement.php" class="btn btn-primary">Cancel</a>
+                                                    <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-primary">Cancel</a>
                                                 </p>
                                             </div>
                                         </form>

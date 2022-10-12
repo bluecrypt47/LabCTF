@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="userManagement.php"><i class="fas fa-caret-left"></i> Back</a>
+                        <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
