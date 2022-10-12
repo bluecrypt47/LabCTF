@@ -47,16 +47,33 @@
 
                     $sql = "SELECT * FROM users WHERE id=$id";
                     $result = mysqli_query($conn, $sql);
+                    $user = mysqli_fetch_assoc($result);
 
-                    $userObject = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    if (isset($_REQUEST['updateUser'])) {
+                        $id = $user['id'];
+                        $name = trim($_REQUEST['name']);
+                        $phoneNumber = trim($_REQUEST['phoneNumber']);
+                        $role = trim($_REQUEST['roles']);
+
+                        if (!empty($name) && !empty($phoneNumber)) {
+                            // if (!empty($name) && !empty($phoneNumber)) {
+                            $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber', roles='$role' WHERE id='$id'";
+                            // $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber' WHERE id='$id'";
+                            mysqli_query($conn, $query);
+                            echo '<script language="javascript"> window.location="userManagement.php";</script>';
+                        } else {
+                            echo '<div class="alert alert-danger">
+                            Update Failed!
+                                </div>';
+                        }
+                    }
                 }
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- <?php foreach ($userObject as $user) : ?> -->
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Profile of <?php echo $user['name']; ?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">User <?php echo $user['name']; ?></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -64,7 +81,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="profile.php" class="user">
+                                        <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
@@ -72,10 +89,10 @@
                                                 <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
+                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" placeholder="Phone number..." required>
                                             </div>
                                             <div class="form-group">
-                                                <select class="form-select form-select-user" aria-label="Default select example">
+                                                <select name="roles" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px;">
                                                     <?php if ($user['roles'] == 0) { ?>
                                                         <option selected value="<?php $user['roles'] ?>">Admin</option>
                                                         <option value="1">User</option>
@@ -86,14 +103,13 @@
                                                 </select>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
+                                            <input type="submit" name="updateUser" value="Update User" class="btn btn-primary btn-user btn-block" />
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <?php endforeach; ?> -->
                     <div>
                         <a class="btn btn-success" href="userManagement.php">Back</a>
                     </div>

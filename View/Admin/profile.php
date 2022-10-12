@@ -57,7 +57,7 @@
 
                         if (!empty($name) && !empty($phoneNumber)) {
                             $update = "UPDATE users SET name='$name',phoneNumber='$phoneNumber' WHERE id='$idUser'";
-                            $result = mysqli_query($conn, $update);
+                            mysqli_query($conn, $update);
                             echo '<script language="javascript">alert("Update Successfully!"); window.location="index.php";</script>';
                         } else {
                             echo '<script language="javascript">alert("Update Fail!"); window.location="profile.php";</script>';
