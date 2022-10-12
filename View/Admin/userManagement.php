@@ -67,7 +67,7 @@
                     <!-- Content Row -->
                     <div class="row">
                         <div>
-                            <a class="btn btn-danger" href="createUser.php"><strong>+</strong> Create User</a>
+                            <a class="btn btn-danger" href="createUser.php"><i class="fas fa-plus"></i> Create User</a>
                         </div>
                         <table class="table ">
                             <thead style="text-align: center;">
@@ -100,10 +100,10 @@
                                                 echo 'User';
                                             } ?></td>
                                         <td><?php echo $user['updateDate']; ?></td>
-                                        <td><a class="btn btn-info" href="viewDetail.php?id=<?php echo $user['id']; ?>">View</a>
+                                        <td><a class="btn btn-info" href="viewDetail.php?id=<?php echo $user['id']; ?>"><i class="fas fa-eye"></i></a>
                                             <?php if ($user1['roles'] == 0) { ?>
-                                                <a class="btn btn-warning" href="updateUser.php?id=<?php echo $user['id']; ?>">Update</a>
-                                                <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>">Delete</a>
+                                                <a class="btn btn-warning" href="updateUser.php?id=<?php echo $user['id']; ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i></a>
                                             <?php } ?>
 
                                         </td>
@@ -113,7 +113,7 @@
                         </table>
 
                         <div>
-                            <a class="btn btn-success" href="index.php">Back</a>
+                            <a class="btn btn-success" href="index.php"><i class="fas fa-caret-left"></i> Back</a>
                         </div>
 
                     </div>

@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="index.php">Back</a>
+                        <a class="btn btn-success" href="index.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
