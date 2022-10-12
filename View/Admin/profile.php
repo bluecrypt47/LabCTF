@@ -82,6 +82,9 @@
                                     <div class="p-10">
                                         <form method="post" action="profile.php" class="user">
                                             <div class="form-group">
+                                                <img src="img/<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                            </div>
+                                            <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
