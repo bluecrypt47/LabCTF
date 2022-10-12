@@ -90,7 +90,7 @@
                                             } ?></td>
                                         <td><?php echo $user['updateDate']; ?></td>
                                         <td><a class="btn btn-info" href="updateUser.php?id=<?php echo $user['id']; ?>">View</a>
-                                            <a class="btn btn-danger" href="#">Delete</a>
+                                            <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>">Delete</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
