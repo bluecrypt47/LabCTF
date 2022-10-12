@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Delete User</title>
+    <title>User Detail</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,34 +49,31 @@
                     $result = mysqli_query($conn, $sql);
                     $user = mysqli_fetch_assoc($result);
 
-                    // ============================================
-                    $email = $_SESSION['email'];
+                    if (isset($_REQUEST['updateUser'])) {
+                        $id = $user['id'];
+                        $name = trim($_REQUEST['name']);
+                        $phoneNumber = trim($_REQUEST['phoneNumber']);
+                        $role = trim($_REQUEST['roles']);
 
-                    $sql1 = "SELECT * FROM users WHERE email='$email'";
-                    $result1 = mysqli_query($conn, $sql1);
-                    $user1 = mysqli_fetch_assoc($result1);
-
-
-                    if (isset($_REQUEST['delete'])) {
-                        if ($user1['id'] != $id) {
-                            $query = "DELETE FROM `users` WHERE id='$id'";
+                        if (!empty($name) && !empty($phoneNumber)) {
+                            // if (!empty($name) && !empty($phoneNumber)) {
+                            $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber', roles='$role' WHERE id='$id'";
+                            // $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber' WHERE id='$id'";
                             mysqli_query($conn, $query);
                             echo '<script language="javascript"> window.location="userManagement.php";</script>';
                         } else {
                             echo '<div class="alert alert-danger">
-                            You cannot delete this user!
-                                    </div>';
+                            Update Failed!
+                                </div>';
                         }
                     }
                 }
-
                 ?>
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Delete User <strong><?php echo $user['name']; ?></strong></h1>
+                        <h1 class="h3 mb-0 text-gray-800">User <?php echo $user['name']; ?></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -84,19 +81,37 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" method="post">
-                                            <div>
-                                                <p>Are you sure you want to delete this User?</p><br>
-                                                <p>
-                                                    <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-                                                    <a href="userManagement.php" class="btn btn-primary">Cancel</a>
-                                                </p>
+                                        <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['name']; ?>" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" placeholder="Phone number..." disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="roles" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px;" disabled>
+                                                    <?php if ($user['roles'] == 0) { ?>
+                                                        <option selected value="<?php $user['roles'] ?>">Admin</option>
+                                                        <option value="1">User</option>
+                                                    <?php } else { ?>
+                                                        <option value="0">Admin</option>
+                                                        <option selected value="<?php $user['roles'] ?>">User</option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <hr>
+                                            <!-- <input type="submit" name="updateUser" value="Update User" class="btn btn-primary btn-user btn-block" /> -->
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <a class="btn btn-success" href="userManagement.php">Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

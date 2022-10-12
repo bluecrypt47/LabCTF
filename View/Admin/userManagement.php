@@ -51,6 +51,14 @@
                     </div>
 
                     <?php
+
+                    $email = $_SESSION['email'];
+
+                    $sql1 = "SELECT * FROM users WHERE email='$email'";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $user1 = mysqli_fetch_assoc($result1);
+                    // ===============================
+
                     $sql = "SELECT * FROM users";
                     $result = mysqli_query($conn, $sql);
                     $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -58,6 +66,9 @@
 
                     <!-- Content Row -->
                     <div class="row">
+                        <div>
+                            <a class="btn btn-danger" href="createUser.php"><strong>+</strong> Create User</a>
+                        </div>
                         <table class="table ">
                             <thead style="text-align: center;">
                                 <tr>
@@ -89,8 +100,12 @@
                                                 echo 'User';
                                             } ?></td>
                                         <td><?php echo $user['updateDate']; ?></td>
-                                        <td><a class="btn btn-info" href="updateUser.php?id=<?php echo $user['id']; ?>">View</a>
-                                            <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>">Delete</a>
+                                        <td><a class="btn btn-info" href="viewDetail.php?id=<?php echo $user['id']; ?>">View</a>
+                                            <?php if ($user1['roles'] == 0) { ?>
+                                                <a class="btn btn-warning" href="updateUser.php?id=<?php echo $user['id']; ?>">Update</a>
+                                                <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>">Delete</a>
+                                            <?php } ?>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
