@@ -48,25 +48,6 @@
                     $sql = "SELECT * FROM users WHERE id=$id";
                     $result = mysqli_query($conn, $sql);
                     $user = mysqli_fetch_assoc($result);
-
-                    if (isset($_REQUEST['updateUser'])) {
-                        $id = $user['id'];
-                        $name = trim($_REQUEST['name']);
-                        $phoneNumber = trim($_REQUEST['phoneNumber']);
-                        $role = trim($_REQUEST['roles']);
-
-                        if (!empty($name) && !empty($phoneNumber)) {
-                            // if (!empty($name) && !empty($phoneNumber)) {
-                            $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber', roles='$role' WHERE id='$id'";
-                            // $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber' WHERE id='$id'";
-                            mysqli_query($conn, $query);
-                            echo '<script language="javascript"> window.location="userManagement.php";</script>';
-                        } else {
-                            echo '<div class="alert alert-danger">
-                            Update Failed!
-                                </div>';
-                        }
-                    }
                 }
                 ?>
                 <!-- Begin Page Content -->
@@ -83,7 +64,7 @@
                                     <div class="p-10">
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
                                             <div class="form-group">
-                                                <img src="img/<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
@@ -106,7 +87,6 @@
                                                 </select>
                                             </div>
                                             <hr>
-                                            <!-- <input type="submit" name="updateUser" value="Update User" class="btn btn-primary btn-user btn-block" /> -->
                                         </form>
                                     </div>
                                 </div>

@@ -55,10 +55,8 @@
                         $phoneNumber = trim($_REQUEST['phoneNumber']);
                         $role = trim($_REQUEST['roles']);
 
-                        if (!empty($name) && !empty($phoneNumber)) {
-                            // if (!empty($name) && !empty($phoneNumber)) {
+                        if (!empty($name) && !empty($phoneNumber) && $isUploaded) {
                             $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber', roles='$role' WHERE id='$id'";
-                            // $query = "UPDATE users SET name='$name', phoneNumber='$phoneNumber' WHERE id='$id'";
                             mysqli_query($conn, $query);
                             echo '<script language="javascript"> window.location="userManagement.php";</script>';
                         } else {
@@ -83,7 +81,7 @@
                                     <div class="p-10">
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
                                             <div class="form-group">
-                                                <img src="img/<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>

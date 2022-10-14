@@ -55,8 +55,12 @@
                         $name = trim($_POST['name']);
                         $phoneNumber = trim($_POST['phoneNumber']);
 
-                        if (!empty($name) && !empty($phoneNumber)) {
-                            $update = "UPDATE users SET name='$name',phoneNumber='$phoneNumber' WHERE id='$idUser'";
+                        $imgName = $_FILES['image']['name'];
+                        $imagePath = "img/" . $imgName;
+                        $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+
+                        if (!empty($name) && !empty($phoneNumber) && $isUploaded) {
+                            $update = "UPDATE users SET name='$name',phoneNumber='$phoneNumber', img='$imagePath' WHERE id='$idUser'";
                             mysqli_query($conn, $update);
                             echo '<script language="javascript">alert("Update Successfully!"); window.location="index.php";</script>';
                         } else {
@@ -80,9 +84,10 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="profile.php" class="user">
+                                        <form method="post" action="profile.php" class="user" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <img src="img/<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <input class="rounded mx-auto" type="file" name="image">
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
