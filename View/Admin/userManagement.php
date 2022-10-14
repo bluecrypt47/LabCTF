@@ -100,10 +100,10 @@
                                                 echo 'User';
                                             } ?></td>
                                         <td><?php echo $user['updateDate']; ?></td>
-                                        <td><a class="btn btn-info" href="viewDetail.php?id=<?php echo $user['id']; ?>"><i class="fas fa-eye"></i></a>
+                                        <td><a class="btn btn-info" title="View" href="viewDetail.php?id=<?php echo $user['id']; ?>"><i class="fas fa-eye"></i></a>
                                             <?php if ($user1['roles'] == 0) { ?>
-                                                <a class="btn btn-warning" href="updateUser.php?id=<?php echo $user['id']; ?>"><i class="fas fa-edit"></i></a>
-                                                <a class="btn btn-danger" href="delete.php?id=<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i></a>
+                                                <a class="btn btn-warning" title="Edit" href="updateUser.php?id=<?php echo $user['id']; ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="btn btn-danger" title="Delete" href="delete.php?id=<?php echo $user['id']; ?>"><i class="fas fa-trash-alt"></i></a>
                                             <?php } ?>
 
                                         </td>
