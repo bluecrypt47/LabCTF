@@ -49,7 +49,7 @@
                     $password = md5(trim($_POST['password']));
                     $rePassword = md5(trim($_POST['rePassword']));
                     $email = trim($_POST['email']);
-                    $phoneNumber = trim($_Post['phoneNumber']);
+                    $phoneNumber = trim($_POST['phoneNumber']);
 
 
                     if (empty($name)) {
@@ -77,6 +77,7 @@
                         echo '<div class="alert alert-danger">
                         Email has existed!
                                 </div>';
+                        echo $phoneNumber;
                         // Dừng chương trình
                         die();
                     } else {

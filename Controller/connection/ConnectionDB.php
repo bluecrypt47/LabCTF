@@ -14,7 +14,7 @@ if (isset($_POST['register'])) {
     $password = md5(trim($_POST['password']));
     $rePassword = md5(trim($_POST['rePassword']));
     $email = trim($_POST['email']);
-    $phoneNumber = trim($_Post['phoneNumber']);
+    $phoneNumber = trim($_POST['phoneNumber']);
 
 
     if (empty($name)) {
@@ -43,7 +43,7 @@ if (isset($_POST['register'])) {
         // Dừng chương trình
         die();
     } else {
-        $sql = "INSERT INTO users (name, email, phoneNumber, password) VALUES ('$name','$email','$phoneNumber', '$password')";
+        $sql = "INSERT INTO users (username, email, phoneNumber, password) VALUES ('$name','$email','$phoneNumber', '$password')";
         echo '<script language="javascript">alert("Register Successfully!"); window.location="login.php";</script>';
 
         if (mysqli_query($conn, $sql)) {
