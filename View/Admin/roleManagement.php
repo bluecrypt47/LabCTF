@@ -110,8 +110,8 @@
                                     <tr>
                                         <th scope="row"><?php echo $i++; ?></th>
                                         <td><?php echo $row['roleName']; ?></td>
-                                        <td><?php echo $user['createDate']; ?></td>
-                                        <td><?php echo $user['updateDate']; ?></td>
+                                        <td><?php echo $row['createDateRole']; ?></td>
+                                        <td><?php echo $row['updateDateRole']; ?></td>
                                         <td><a class="btn btn-info" title="View" href="viewDetailRole.php?id=<?php echo $row['idRole']; ?>"><i class="fas fa-eye"></i></a>
                                             <?php if ($user1['roles'] == 1) { ?>
                                                 <a class="btn btn-warning" title="Edit" href="updateRole.php?id=<?php echo $row['idRole']; ?>"><i class="fas fa-edit"></i></a>

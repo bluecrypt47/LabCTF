@@ -1,5 +1,6 @@
 <?php session_start() ?>
 <?php require 'D:\DVWA\ProjectCTF\Controller\connection\ConnectionDB.php'; ?>
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,6 +49,7 @@
                     $sql = "SELECT * FROM users WHERE id=$id";
                     $result = mysqli_query($conn, $sql);
                     $user = mysqli_fetch_assoc($result);
+                    $updateDate = date("Y-m-d H:i:s");
 
                     if (isset($_REQUEST['updateUser'])) {
                         $id = $user['id'];
@@ -56,7 +58,7 @@
                         $role = trim($_REQUEST['roles']);
 
                         if (!empty($name) && !empty($phoneNumber)) {
-                            $query = "UPDATE users SET username='$name', phoneNumber='$phoneNumber', roles='$role' WHERE id='$id'";
+                            $query = "UPDATE users SET username='$name', phoneNumber='$phoneNumber', roles='$role', updateDate='$updateDate' WHERE id='$id'";
                             mysqli_query($conn, $query);
                             echo '<script language="javascript"> window.location="userManagement.php";</script>';
                         } else {
@@ -81,7 +83,8 @@
                             <!-- Nested Row within Card Body -->
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="p-10">
+                                    <div class="p-10"><?php
+                                                        echo $updateDate; ?>
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
                                             <div class="form-group">
                                                 <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">

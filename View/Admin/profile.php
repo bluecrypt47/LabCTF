@@ -1,5 +1,6 @@
 <?php session_start() ?>
 <?php require 'D:\DVWA\ProjectCTF\Controller\connection\ConnectionDB.php'; ?>
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,6 +48,7 @@
                 $sql = "SELECT * FROM users WHERE email='$email'";
                 $result = mysqli_query($conn, $sql);
                 $user = mysqli_fetch_assoc($result);
+                $updateDate = date("Y-m-d H:i:s");
 
                 if (isset($user['id'])) {
                     // Update profile
@@ -59,8 +61,8 @@
                         $imagePath = "img/" . $imgName;
                         $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
 
-                        if (!empty($name) && !empty($phoneNumber) && $isUploaded) {
-                            $update = "UPDATE users SET username='$name',phoneNumber='$phoneNumber', img='$imagePath' WHERE id='$idUser'";
+                        if (!empty($name) && !empty($phoneNumber)) {
+                            $update = "UPDATE users SET username='$name',phoneNumber='$phoneNumber', img='$imagePath', updateDate='$updateDate' WHERE id='$idUser'";
                             mysqli_query($conn, $update);
                             echo '<script language="javascript">alert("Update Successfully!"); window.location="index.php";</script>';
                         } else {

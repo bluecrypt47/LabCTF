@@ -1,5 +1,6 @@
 <?php session_start() ?>
 <?php require 'D:\DVWA\ProjectCTF\Controller\connection\ConnectionDB.php'; ?>
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,6 +56,7 @@
                     $sql = "SELECT * FROM users WHERE email='$email'";
                     $result = mysqli_query($conn, $sql);
                     $user = mysqli_fetch_assoc($result);
+                    $updateDate = date("Y-m-d H:i:s");
 
                     if (isset($user['id'])) {
                         // Update profile
@@ -74,7 +76,7 @@
                                         Current password incorrect!
                                     </div>';
                                 } else {
-                                    $update = "UPDATE users SET password='$newPassword' WHERE id='$idUser'";
+                                    $update = "UPDATE users SET password='$newPassword', updateDate='$updateDate' WHERE id='$idUser'";
                                     $result = mysqli_query($conn, $update);
                                     echo '<script language="javascript">alert("Change password Successfully!"); window.location="logout.php";</script>';
                                 }

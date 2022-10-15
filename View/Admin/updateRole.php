@@ -1,5 +1,6 @@
 <?php session_start() ?>
 <?php require 'D:\DVWA\ProjectCTF\Controller\connection\ConnectionDB.php'; ?>
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,12 +49,13 @@
                     $sql = "SELECT * FROM roles WHERE idRole=$id";
                     $result = mysqli_query($conn, $sql);
                     $role = mysqli_fetch_assoc($result);
+                    $updateDate = date("Y-m-d H:i:s");
 
                     if (isset($_REQUEST['updateRole'])) {
                         $name = trim($_REQUEST['name']);
 
                         if (!empty($name)) {
-                            $query = "UPDATE roles SET roleName='$name' WHERE idRole='$id'";
+                            $query = "UPDATE roles SET roleName='$name', updateDateRole='$updateDate' WHERE idRole='$id'";
                             mysqli_query($conn, $query);
                             echo '<script language="javascript"> window.location="roleManagement.php";</script>';
                         } else {
