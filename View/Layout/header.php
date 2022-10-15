@@ -163,7 +163,7 @@
             // echo '<h1 align="center">Welcome ' . $user['username'] . "!</h1>";
             echo '<li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-            echo '<span class="mr-2 d-none d-lg-inline text-gray-600 small">' . $user['name'] . '</span>';
+            echo '<span class="mr-2 d-none d-lg-inline text-gray-600 small">' . $user['username'] . '</span>';
             echo '    <img class="img-profile rounded-circle" src="' . $user['img'] . '">
                             </a>
                             <!-- Dropdown - User Information -->

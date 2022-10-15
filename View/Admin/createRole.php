@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Profie</title>
+    <title>Create User</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,41 +42,49 @@
                 <!-- End of Topbar -->
 
                 <?php
-                $email = $_SESSION['email'];
 
-                $sql = "SELECT * FROM users WHERE email='$email'";
-                $result = mysqli_query($conn, $sql);
-                $user = mysqli_fetch_assoc($result);
+                // Create Role
+                if (isset($_POST['createRole'])) {
+                    $name = trim($_POST['name']);
 
-                if (isset($user['id'])) {
-                    // Update profile
-                    if (isset($_REQUEST['update'])) {
-                        $idUser = $user['id'];
-                        $name = trim($_POST['name']);
-                        $phoneNumber = trim($_POST['phoneNumber']);
 
-                        $imgName = $_FILES['image']['name'];
-                        $imagePath = "img/" . $imgName;
-                        $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+                    if (empty($name)) {
+                        array_push($errors, "Name is required");
+                    }
 
-                        if (!empty($name) && !empty($phoneNumber) && $isUploaded) {
-                            $update = "UPDATE users SET username='$name',phoneNumber='$phoneNumber', img='$imagePath' WHERE id='$idUser'";
-                            mysqli_query($conn, $update);
-                            echo '<script language="javascript">alert("Update Successfully!"); window.location="index.php";</script>';
+                    // Kiểm tra role có bị trùng hay không
+                    $sql = "SELECT * FROM roles WHERE roleName = '$name'";
+
+                    // Thực thi câu truy vấn
+                    $result = mysqli_query($conn, $sql);
+
+                    // Nếu kết quả trả về lớn hơn 1 thì nghĩa là email đã tồn tại trong DB
+                    if (mysqli_num_rows($result) > 0) {
+                        echo '<div class="alert alert-danger">
+                        Role has existed!
+                                </div>';
+                        // Dừng chương trình
+                        die();
+                    } else {
+                        $sql = "INSERT INTO roles (`roleName`) VALUES ('$name')";
+                        echo '<script language="javascript">alert("Create Role Successfully!"); window.location="roleManagement.php";</script>';
+
+                        if (mysqli_query($conn, $sql)) {
+                            echo "Tên: " . $_POST['name'] . "<br/>";
                         } else {
-                            echo '<script language="javascript">alert("Update Fail!"); window.location="profile.php";</script>';
+                            echo '<div class="alert alert-danger">
+                            Create Role Fail!
+                                </div>';
                         }
                     }
                 }
 
                 ?>
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Profile of <?php echo $user['username']; ?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Create Role</h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -84,22 +92,12 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="profile.php" class="user" enctype="multipart/form-data">
+                                        <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" class="user">
                                             <div class="form-group">
-                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
-                                                <input class="rounded mx-auto" type="file" name="image">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['username']; ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
+                                                <input type="text" class="form-control form-control-user" name="name" placeholder="Name" required>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
+                                            <input type="submit" name="createRole" value="Create Role" class="btn btn-primary btn-user btn-block" />
                                         </form>
                                     </div>
                                 </div>
@@ -111,7 +109,6 @@
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 

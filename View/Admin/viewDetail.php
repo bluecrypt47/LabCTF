@@ -45,7 +45,7 @@
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
 
-                    $sql = "SELECT * FROM users WHERE id=$id";
+                    $sql = "SELECT * FROM users , roles  WHERE users.roles = roles.idRole AND users.id=$id";
                     $result = mysqli_query($conn, $sql);
                     $user = mysqli_fetch_assoc($result);
                 }
@@ -54,7 +54,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">User <?php echo $user['name']; ?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">User <strong><?php echo $user['username']; ?></strong></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -70,21 +70,15 @@
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['name']; ?>" disabled>
+                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['username']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" placeholder="Phone number..." disabled>
                                             </div>
-                                            <div class="form-group">
-                                                <select name="roles" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px;" disabled>
-                                                    <?php if ($user['roles'] == 0) { ?>
-                                                        <option selected value="<?php $user['roles'] ?>">Admin</option>
-                                                        <option value="1">User</option>
-                                                    <?php } else { ?>
-                                                        <option value="0">Admin</option>
-                                                        <option selected value="<?php $user['roles'] ?>">User</option>
-                                                    <?php } ?>
-                                                </select>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user" name="password" value="<?php echo $user['roleName']; ?>" disabled>
+                                                </div>
                                             </div>
                                             <hr>
                                         </form>

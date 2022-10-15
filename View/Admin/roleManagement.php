@@ -46,7 +46,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">List Users</h1>
+                        <h1 class="h3 mb-0 text-gray-800">List Roles</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
@@ -59,11 +59,16 @@
                     $user1 = mysqli_fetch_assoc($result1);
                     // ===============================
 
+                    $sqlRole = "SELECT * FROM roles ";
+                    $resultRole = mysqli_query($conn, $sqlRole);
+
+                    // ===============================
+
                     // Get all user in DB and pagination
                     $count = 0;
 
-                    $countUsers = mysqli_query($conn, "SELECT count(*) as total FROM users");
-                    $rows = mysqli_fetch_assoc($countUsers);
+                    $countRoles = mysqli_query($conn, "SELECT count(*) as total FROM roles");
+                    $rows = mysqli_fetch_assoc($countRoles);
 
                     $totalRows = $rows['total'];
 
@@ -80,45 +85,37 @@
                     }
                     $start = ($currentPage - 1) * $limit;
 
-                    $result = mysqli_query($conn, "SELECT * FROM users , roles  where users.roles = roles.idRole LIMIT $start, $limit");
-
-                    // $sqlRole = "SELECT * FROM roles";
-                    // $resultRole = mysqli_query($conn, $sqlRole);
-                    // $userRole = mysqli_fetch_assoc($resultRole);
+                    $result = mysqli_query($conn, "SELECT * FROM roles LIMIT $start, $limit");
 
                     ?>
 
                     <!-- Content Row -->
                     <div class="row">
                         <div>
-                            <a class="btn btn-danger" href="createUser.php"><i class="fas fa-plus"></i> Create User</a>
+                            <a class="btn btn-danger" href="createRole.php"><i class="fas fa-plus"></i> Create Role</a>
                         </div>
                         <table class="table ">
                             <thead style="text-align: center;">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Role</th>
+                                    <th scope="col">Create at</th>
                                     <th scope="col">Update at</th>
                                     <th scope="col">Activity</th>
                                 </tr>
                             </thead>
                             <tbody style="text-align: center;">
                                 <?php $i = 1;
-                                while ($row = mysqli_fetch_assoc($result)) { ?>
+                                while ($row = mysqli_fetch_assoc($resultRole)) { ?>
                                     <tr>
                                         <th scope="row"><?php echo $i++; ?></th>
-                                        <td><?php echo $row['username']; ?></td>
-                                        <td><?php echo $row['email']; ?></td>
-                                        <td><?php echo $row['phoneNumber']; ?></td>
                                         <td><?php echo $row['roleName']; ?></td>
-                                        <td><?php echo $row['updateDate']; ?></td>
-                                        <td><a class="btn btn-info" title="View" href="viewDetail.php?id=<?php echo $row['id']; ?>"><i class="fas fa-eye"></i></a>
+                                        <td><?php echo $user['createDate']; ?></td>
+                                        <td><?php echo $user['updateDate']; ?></td>
+                                        <td><a class="btn btn-info" title="View" href="viewDetailRole.php?id=<?php echo $row['idRole']; ?>"><i class="fas fa-eye"></i></a>
                                             <?php if ($user1['roles'] == 1) { ?>
-                                                <a class="btn btn-warning" title="Edit" href="updateUser.php?id=<?php echo $row['id']; ?>"><i class="fas fa-edit"></i></a>
-                                                <a class="btn btn-danger" title="Delete" href="delete.php?id=<?php echo $row['id']; ?>"><i class="fas fa-trash-alt"></i></a>
+                                                <a class="btn btn-warning" title="Edit" href="updateRole.php?id=<?php echo $row['idRole']; ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="btn btn-danger" title="Delete" href="deleteRole.php?id=<?php echo $row['idRole']; ?>"><i class="fas fa-trash-alt"></i></a>
                                             <?php } ?>
                                         </td>
                                     </tr>
@@ -135,7 +132,7 @@
                             <ul class="pagination">
                                 <li class="page-item">
                                     <?php if ($currentPage > 1 && $totalPage > 1) { ?>
-                                        <a class="page-link" href="userManagement.php?currentPage=<?php $currentPage - 1; ?>" aria-label="Previous">
+                                        <a class="page-link" href="roleManagement.php?currentPage=<?php $currentPage - 1; ?>" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
@@ -147,12 +144,12 @@
                                 <li class="page-item"><a class="page-link" href="#"><?php echo $i; ?></a></li>
                             <?php  } else { ?>
 
-                                <li class="page-item"><a class="page-link" href="userManagement.php?currentPage=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item"><a class="page-link" href="roleManagement.php?currentPage=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                             <?php   }
                                     }
                                     if ($currentPage < $totalPage && $totalPage > 1) { ?>
                             <li class="page-item">
-                                <a class="page-link" href="userManagement.php?currentPage=<?php echo $currentPage + 1; ?>" aria-label="Next">
+                                <a class="page-link" href="roleManagement.php?currentPage=<?php echo $currentPage + 1; ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>

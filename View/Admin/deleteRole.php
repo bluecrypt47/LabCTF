@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Profie</title>
+    <title>Delete User</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,30 +42,19 @@
                 <!-- End of Topbar -->
 
                 <?php
-                $email = $_SESSION['email'];
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
 
-                $sql = "SELECT * FROM users WHERE email='$email'";
-                $result = mysqli_query($conn, $sql);
-                $user = mysqli_fetch_assoc($result);
+                    $sql = "SELECT * FROM roles WHERE idRole=$id";
+                    $result = mysqli_query($conn, $sql);
+                    $role = mysqli_fetch_assoc($result);
 
-                if (isset($user['id'])) {
-                    // Update profile
-                    if (isset($_REQUEST['update'])) {
-                        $idUser = $user['id'];
-                        $name = trim($_POST['name']);
-                        $phoneNumber = trim($_POST['phoneNumber']);
 
-                        $imgName = $_FILES['image']['name'];
-                        $imagePath = "img/" . $imgName;
-                        $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
 
-                        if (!empty($name) && !empty($phoneNumber) && $isUploaded) {
-                            $update = "UPDATE users SET username='$name',phoneNumber='$phoneNumber', img='$imagePath' WHERE id='$idUser'";
-                            mysqli_query($conn, $update);
-                            echo '<script language="javascript">alert("Update Successfully!"); window.location="index.php";</script>';
-                        } else {
-                            echo '<script language="javascript">alert("Update Fail!"); window.location="profile.php";</script>';
-                        }
+                    if (isset($_REQUEST['deleteRole'])) {
+                        $query = "DELETE FROM `roles` WHERE idRole='$id'";
+                        mysqli_query($conn, $query);
+                        echo '<script language="javascript"> window.location="roleManagement.php";</script>';
                     }
                 }
 
@@ -73,10 +62,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Profile of <?php echo $user['username']; ?></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Delete Role <strong><?php echo $role['roleName']; ?></strong></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -84,34 +72,22 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="profile.php" class="user" enctype="multipart/form-data">
-                                            <div class="form-group">
-                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
-                                                <input class="rounded mx-auto" type="file" name="image">
+                                        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" method="post">
+                                            <div>
+                                                <p>Are you sure you want to delete this Role?</p><br>
+                                                <p>
+                                                    <input type="submit" name="deleteRole" value="Delete" class="btn btn-danger">
+                                                    <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-primary">Cancel</a>
+                                                </p>
                                             </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['username']; ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
-                                            </div>
-                                            <hr>
-                                            <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 

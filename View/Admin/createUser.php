@@ -80,13 +80,14 @@
                         // Dừng chương trình
                         die();
                     } else {
-                        $sql = "INSERT INTO users (name, email, phoneNumber, password) VALUES ('$name','$email','$phoneNumber', '$password')";
+                        $sql = "INSERT INTO users (username, email, phoneNumber, password) VALUES ('$name','$email','$phoneNumber', '$password')";
                         echo '<script language="javascript">alert("Create User Successfully!"); window.location="userManagement.php";</script>';
 
                         if (mysqli_query($conn, $sql)) {
                             echo "Tên đăng nhập: " . $_POST['username'] . "<br/>";
                             echo "Mật khẩu: " . $_POST['password'] . "<br/>";
                             echo "Email đăng nhập: " . $_POST['email'] . "<br/>";
+                            echo "Số điện thoại: " . $_POST['phoneNumber'] . "<br/>";
                         } else {
                             echo '<div class="alert alert-danger">
                             Create User Fail!
