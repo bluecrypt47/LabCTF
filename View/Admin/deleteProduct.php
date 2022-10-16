@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User Detail</title>
+    <title>Delete User</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,16 +45,38 @@
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
 
-                    $sql = "SELECT * FROM roles WHERE idRole=$id";
+                    $sql = "SELECT * FROM products WHERE idProduct =$id";
                     $result = mysqli_query($conn, $sql);
-                    $role = mysqli_fetch_assoc($result);
+                    $product = mysqli_fetch_assoc($result);
+
+                    // ============================================
+                    $email = $_SESSION['email'];
+
+                    $sql1 = "SELECT * FROM users WHERE email='$email'";
+                    $result1 = mysqli_query($conn, $sql1);
+                    $user1 = mysqli_fetch_assoc($result1);
+
+
+                    if (isset($_REQUEST['deleteProduct'])) {
+                        if ($user1['id'] != $id) {
+                            $query = "DELETE FROM `products` WHERE idProduct='$id'";
+                            mysqli_query($conn, $query);
+                            echo '<script language="javascript"> window.location="productManagement.php";</script>';
+                        } else {
+                            echo '<div class="alert alert-danger">
+                            You cannot delete this product!
+                                    </div>';
+                        }
+                    }
                 }
+
                 ?>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Role <strong><?php echo $role['roleName']; ?></strong></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Delete Product <strong><?php echo $product['nameProduct']; ?></strong></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -62,19 +84,19 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-10">
-                                        <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $role['roleName']; ?>" disabled>
+                                        <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" method="post">
+                                            <div>
+                                                <p>Are you sure you want to delete this Product?</p><br>
+                                                <p>
+                                                    <a href="productManagement.php" class="btn btn-primary">Cancel</a>
+                                                    <input type="submit" name="deleteProduct" value="Delete" class="btn btn-danger">
+                                                </p>
                                             </div>
-                                            <hr>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <a class="btn btn-success" href="roleManagement.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

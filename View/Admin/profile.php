@@ -89,15 +89,19 @@
                                         <form method="post" action="profile.php" class="user" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <label>Image<label style="color: red;">*</label></label>
                                                 <input class="rounded mx-auto" type="file" name="image">
                                             </div>
                                             <div class="form-group">
+                                                <label>Email<label style="color: red;">*</label></label>
                                                 <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
+                                                <label>Username<label style="color: red;">*</label></label>
                                                 <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['username']; ?>" required>
                                             </div>
                                             <div class="form-group">
+                                                <label>Phone Number</label>
                                                 <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
                                             </div>
                                             <hr>

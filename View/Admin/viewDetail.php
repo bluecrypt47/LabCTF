@@ -76,7 +76,7 @@
                                                 <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" placeholder="Phone number..." disabled>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="col-sm-4 mb-3 mb-sm-0">
                                                     <input type="text" class="form-control form-control-user" name="password" value="<?php echo $user['roleName']; ?>" disabled>
                                                 </div>
                                             </div>
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
+                        <a class="btn btn-success" href="userManagement.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

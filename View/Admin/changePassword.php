@@ -100,12 +100,15 @@
                                     <div class="p-10">
                                         <form method="post" action="changePassword.php" class="user">
                                             <div class="form-group">
+                                                <label>Current Password<label style="color: red;">*</label></label>
                                                 <input type="password" class="form-control form-control-user" name="currentPassword" aria-describedby="emailHelp" placeholder="Enter Current Password...">
                                             </div>
                                             <div class="form-group">
+                                                <label>New Passwordd<label style="color: red;">*</label></label>
                                                 <input type="password" class="form-control form-control-user" name="newPassword" placeholder="Enter New Password...">
                                             </div>
                                             <div class="form-group">
+                                                <label>Re-New Password<label style="color: red;">*</label></label>
                                                 <input type="password" class="form-control form-control-user" name="reNewPassword" placeholder="Enter Repeat New Password...">
                                             </div>
                                             <hr>

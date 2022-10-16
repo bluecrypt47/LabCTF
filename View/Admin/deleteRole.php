@@ -76,8 +76,8 @@
                                             <div>
                                                 <p>Are you sure you want to delete this Role?</p><br>
                                                 <p>
+                                                    <a href="roleManagement.php" class="btn btn-primary">Cancel</a>
                                                     <input type="submit" name="deleteRole" value="Delete" class="btn btn-danger">
-                                                    <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-primary">Cancel</a>
                                                 </p>
                                             </div>
                                         </form>

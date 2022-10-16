@@ -37,20 +37,25 @@
                             <form method="post" action="register.php" class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Username<label style="color: red;">*</label></label>
                                         <input type="text" class="form-control form-control-user" name="name" placeholder="Name" required>
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Phone Number<label style="color: red; visibility: hidden;">*</label></label>
                                         <input type="text" class="form-control form-control-user" name="phoneNumber" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label>Email<label style="color: red;">*</label></label>
                                     <input type="email" class="form-control form-control-user" name="email" placeholder="Email Address" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Password<label style="color: red;">*</label></label>
                                         <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                                     </div>
                                     <div class="col-sm-6">
+                                        <label>Re-Password<label style="color: red;">*</label></label>
                                         <input type="password" class="form-control form-control-user" name="rePassword" placeholder="Repeat Password">
                                     </div>
                                 </div>

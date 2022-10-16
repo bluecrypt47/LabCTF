@@ -41,9 +41,11 @@
                                     </div>
                                     <form method="post" action="login.php" class="user">
                                         <div class="form-group">
+                                            <label>Email</label>
                                             <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address..." required>
                                         </div>
                                         <div class="form-group">
+                                            <label>Password</label>
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                                         </div>
                                         <div class="form-group">

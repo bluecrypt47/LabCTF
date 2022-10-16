@@ -94,6 +94,7 @@
                                     <div class="p-10">
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" class="user">
                                             <div class="form-group">
+                                                <label>Name Role<label style="color: red;">*</label></label>
                                                 <input type="text" class="form-control form-control-user" name="name" placeholder="Name" required>
                                             </div>
                                             <hr>
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
+                        <a class="btn btn-success" href="roleManagement.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

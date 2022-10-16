@@ -1,6 +1,5 @@
 <?php session_start() ?>
 <?php require 'D:\DVWA\ProjectCTF\Controller\connection\ConnectionDB.php'; ?>
-<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,37 +45,19 @@
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
 
-                    $sql = "SELECT * FROM users WHERE id=$id";
+                    $sql = "SELECT * FROM products, producttype  WHERE products.idType=producttype.idType AND idProduct=$id";
                     $result = mysqli_query($conn, $sql);
-                    $user = mysqli_fetch_assoc($result);
-                    $updateDate = date("Y-m-d H:i:s");
-
-                    if (isset($_REQUEST['updateUser'])) {
-                        $id = $user['id'];
-                        $name = trim($_REQUEST['name']);
-                        $phoneNumber = trim($_REQUEST['phoneNumber']);
-                        $role = trim($_REQUEST['roles']);
-
-                        if (!empty($name) && !empty($phoneNumber)) {
-                            $query = "UPDATE users SET username='$name', phoneNumber='$phoneNumber', roles='$role', updateDate='$updateDate' WHERE id='$id'";
-                            mysqli_query($conn, $query);
-                            echo '<script language="javascript"> window.location="userManagement.php";</script>';
-                        } else {
-                            echo '<div class="alert alert-danger">
-                            Update Failed!
-                                </div>';
-                        }
-                    }
-
-                    $sqlRole = "SELECT * FROM roles";
-                    $resultRole = mysqli_query($conn, $sqlRole);
+                    $product = mysqli_fetch_assoc($result);
                 }
+
+                $sqlType = "SELECT * FROM producttype";
+                $resultType = mysqli_query($conn, $sqlType);
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">User <strong><?php echo $user['username']; ?></strong></h1>
+                        <h1 class="h3 mb-0 text-gray-800">Product <strong><?php echo $product['nameProduct']; ?></strong></h1>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -86,34 +67,32 @@
                                     <div class="p-10">
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])) ?>" class="user">
                                             <div class="form-group">
-                                                <img src="<?php echo $user['img']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <img src="<?php echo $product['imgProduct']; ?>" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user" name="name" placeholder="Name product" value="<?php echo $product['nameProduct']; ?>" disabled>
+                                                </div>
+                                                <div class="col-sm-6 ">
+                                                    <input type="text" class="form-control form-control-user" name="type" placeholder="Type" value="<?php echo $product['nameType']; ?>" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control form-control-user" name="price" placeholder="Price" value="<?php $price = number_format($product['price']);
+                                                                                                                                                        echo $price; ?>₫" disabled>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="number" class="form-control form-control-user" name="quantity" placeholder="Quantity" value="<?php echo $product['quantity']; ?>" disabled>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control form-control-user" name="unit" placeholder="Unit" value="<?php echo $product['unit']; ?>" disabled>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Email<label style="color: red;">*</label></label>
-                                                <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" value="<?php echo $user['email']; ?>" disabled>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Username<label style="color: red;">*</label></label>
-                                                <input type="text" class="form-control form-control-user" name="name" value="<?php echo $user['username']; ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Phone Number<label style="color: red; visibility: hidden;">*</label></label>
-                                                <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" placeholder="Phone number..." required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Role<label style="color: red;">*</label></label>
-                                                <select name="roles" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px;">
-                                                    <?php while ($roles = mysqli_fetch_assoc($resultRole)) {
-                                                        if ($roles['idRole'] == $user['roles']) { ?>
-                                                            <option selected value="<?php echo $roles['idRole']; ?>"><?php echo $roles['roleName']; ?></option>
-                                                        <?php  } else { ?>
-                                                            <option value="<?php echo $roles['idRole']; ?>"><?php echo $roles['roleName']; ?></option>
-                                                    <?php   }
-                                                    } ?>
-                                                </select>
+                                                <textarea type="textarea" class="form-control " name="description" rows="10" cols="50" placeholder="Description" disabled><?php echo $product['description']; ?></textarea>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="updateUser" value="Update User" class="btn btn-primary btn-user btn-block" />
                                         </form>
                                     </div>
                                 </div>
@@ -121,7 +100,7 @@
                         </div>
                     </div>
                     <div>
-                        <a class="btn btn-success" href="userManagement.php"><i class="fas fa-caret-left"></i> Back</a>
+                        <a class="btn btn-success" href="productManagement.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
