@@ -58,7 +58,7 @@
                         $phoneNumber = trim($_POST['phoneNumber']);
 
                         $imgName = $_FILES['image']['name'];
-                        $imagePath = "../../assets/img/" . $imgName;
+                        $imagePath = "../../assets/img/users/" . $imgName;
                         $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
 
                         if (!empty($name) && !empty($phoneNumber)) {

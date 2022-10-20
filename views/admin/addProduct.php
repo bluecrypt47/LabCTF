@@ -1,5 +1,5 @@
 <?php session_start() ?>
-<?php require 'D:\DVWA\ProjectCTF\controllers\connection\connectionDB.php'; ?>
+<?php require '../../controllers/connection/connectionDB.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +53,7 @@
                     $description = trim($_POST['description']);
 
                     $imgName = $_FILES['image']['name'];
-                    $imagePath = "img/products/" . $imgName;
+                    $imagePath = "../../assets/img/products/" . $imgName;
                     $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
 
                     // Kiểm tra email có bị trùng hay không
@@ -88,6 +88,10 @@
                                 </div>';
                     }
                     // }
+
+                    $sqlType = "SELECT * FROM producttype ";
+                    $resultType = mysqli_query($conn, $sqlType);
+                    $total = $resultType->num_rows;
                 }
 
                 ?>
@@ -105,7 +109,7 @@
                                     <div class="p-10">
                                         <form method="post" action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" class="user" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <img src="img/undraw_profile.svg" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
+                                                <img src="../../assets/img/undraw_posting_photo.svg" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
                                                 <label>Image<label style="color: red;">*</label></label>
                                                 <input class="rounded mx-auto" type="file" name="image">
                                             </div>
@@ -114,10 +118,22 @@
                                                     <label>Name Product<label style="color: red;">*</label></label>
                                                     <input type="text" class="form-control form-control-user" name="name" placeholder="Name product" required>
                                                 </div>
-                                                <div class="col-sm-6 ">
+                                                <div class="form-group">
+                                                    <label>Product Type<label style="color: red;">*</label></label>
+                                                    <select name="type" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px; width: 100px; height: calc(1.5em + 0.75rem + 2px); text-align: center;">
+                                                        <?php if ($total > 0) {
+                                                            while ($types = mysqli_fetch_assoc($resultType)) { ?>
+                                                                <option selected value="<?php echo $types['idType']; ?>"><?php echo $types['nameType']; ?> </option>
+                                                            <?php }
+                                                        } else { ?>
+                                                            <option selected value="#">None</option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <!-- <div class="col-sm-6 ">
                                                     <label>Type<label style="color: red;">*</label></label>
                                                     <input type="text" class="form-control form-control-user" name="type" placeholder="Type" required>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-4">
