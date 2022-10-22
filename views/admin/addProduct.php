@@ -43,7 +43,7 @@
 
                 <?php
 
-                // Register
+                // Create 
                 if (isset($_POST['addProduct'])) {
                     $nameProduct = trim($_POST['name']);
                     $typeProduct = trim($_POST['type']);
@@ -87,13 +87,10 @@
                             Add Product Fail!
                                 </div>';
                     }
-                    // }
-
-                    $sqlType = "SELECT * FROM producttype ";
-                    $resultType = mysqli_query($conn, $sqlType);
-                    $total = $resultType->num_rows;
                 }
 
+                $sqlType = "SELECT * FROM producttype";
+                $resultType = mysqli_query($conn, $sqlType);
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -111,7 +108,7 @@
                                             <div class="form-group">
                                                 <img src="../../assets/img/undraw_posting_photo.svg" class="rounded mx-auto d-block" alt="Avatar" style="width:200px;height:300px;">
                                                 <label>Image<label style="color: red;">*</label></label>
-                                                <input class="rounded mx-auto" type="file" name="image">
+                                                <input class="rounded mx-auto" type="file" name="image" required>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -119,21 +116,17 @@
                                                     <input type="text" class="form-control form-control-user" name="name" placeholder="Name product" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Product Type<label style="color: red;">*</label></label>
-                                                    <select name="type" class="form-select form-select-user" aria-label="Default select example" style="border-radius: 10px; width: 100px; height: calc(1.5em + 0.75rem + 2px); text-align: center;">
-                                                        <?php if ($total > 0) {
+                                                    <select name="type" class="form-select form-select-user" aria-label="Default select example" style=" position: absolute; top: 400px; border-radius: 10px; width: 150px; height: calc(1.5em + 0.75rem + 2px); text-align: center;">
+                                                        <option selected value="0">Select Type<label style="color: red;">*</label></option>
+                                                        <?php if ($resultType->num_rows > 0) {
                                                             while ($types = mysqli_fetch_assoc($resultType)) { ?>
-                                                                <option selected value="<?php echo $types['idType']; ?>"><?php echo $types['nameType']; ?> </option>
+                                                                <option value="<?php echo $types['idType']; ?>"><?php echo $types['nameType']; ?> </option>
                                                             <?php }
                                                         } else { ?>
-                                                            <option selected value="#">None</option>
+                                                            <option selected value="0">None</option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-sm-6 ">
-                                                    <label>Type<label style="color: red;">*</label></label>
-                                                    <input type="text" class="form-control form-control-user" name="type" placeholder="Type" required>
-                                                </div> -->
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-4">

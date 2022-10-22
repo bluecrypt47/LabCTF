@@ -1,5 +1,5 @@
 <?php session_start() ?>
-<?php require '../../controllers/account/accountController.php'; ?>
+<?php require '../../controllers/connection/connectionDB.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -45,6 +45,7 @@
                 // Create 
                 if (isset($_POST['create'])) {
                     $name = trim($_POST['name']);
+                    $role = trim($_POST['role']);
                     $password = md5(trim($_POST['password']));
                     $rePassword = md5(trim($_POST['rePassword']));
                     $email = trim($_POST['email']);
@@ -79,7 +80,7 @@
                         // Dừng chương trình
                         die();
                     } else {
-                        $sql = "INSERT INTO users (username, email, phoneNumber, password) VALUES ('$name','$email','$phoneNumber', '$password')";
+                        $sql = "INSERT INTO users (username, email, phoneNumber, password, roles) VALUES ('$name','$email','$phoneNumber', '$password', $role)";
                         echo '<script language="javascript">alert("Create User Successfully!"); window.location="userManagement.php";</script>';
 
                         if (mysqli_query($conn, $sql)) {
@@ -87,13 +88,17 @@
                             echo "Mật khẩu: " . $_POST['password'] . "<br/>";
                             echo "Email đăng nhập: " . $_POST['email'] . "<br/>";
                             echo "Số điện thoại: " . $_POST['phoneNumber'] . "<br/>";
+                            echo "Quyền: " . $_POST['role'] . "<br/>";
                         } else {
                             echo '<div class="alert alert-danger">
                             Create User Fail!
                                 </div>';
                         }
                     }
-                } ?>
+                }
+                $sqlRole = "SELECT * FROM roles";
+                $resultRoles = mysqli_query($conn, $sqlRole);
+                ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
@@ -112,9 +117,21 @@
                                                     <label>Username<label style="color: red;">*</label></label>
                                                     <input type="text" class="form-control form-control-user" name="name" placeholder="Name" required>
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3">
                                                     <label>Phone Number<label style="color: red; visibility: hidden;">*</label></label>
                                                     <input type="text" class="form-control form-control-user" name="phoneNumber" placeholder="Phone Number">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <select name="role" style=" position: absolute; top: 40px; border-radius: 10px; width: 150px; height: calc(1.5em + 0.75rem + 2px); text-align: center;" class="form-select form-select-user" aria-label="Default select example">
+                                                        <option selected value="0">Select Type<label style="color: red;">*</label></option>
+                                                        <?php if ($resultRoles->num_rows > 0) {
+                                                            while ($roles = mysqli_fetch_assoc($resultRoles)) { ?>
+                                                                <option value="<?php echo $roles['idRole']; ?>"><?php echo $roles['roleName']; ?> </option>
+                                                            <?php }
+                                                        } else { ?>
+                                                            <option selected value="0">None</option>
+                                                        <?php } ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -132,15 +149,19 @@
                                                 </div>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="create" value="Create User" class="btn btn-primary btn-user btn-block" />
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a class="btn btn-success btn-user btn-block" href="userManagement.php"><i class="fas fa-caret-left"></i> Back</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="submit" name="create" value="Create User" class="btn btn-primary btn-user btn-block" />
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <a class="btn btn-success" href="userManagement.php"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

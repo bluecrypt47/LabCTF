@@ -105,15 +105,19 @@
                                                 <input type="text" class="form-control form-control-user" name="phoneNumber" value="<?php echo $user['phoneNumber']; ?>" required>
                                             </div>
                                             <hr>
-                                            <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a class="btn btn-success btn-user btn-block" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="submit" name="update" value="Update" class="btn btn-primary btn-user btn-block" />
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <a class="btn btn-success" href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><i class="fas fa-caret-left"></i> Back</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
