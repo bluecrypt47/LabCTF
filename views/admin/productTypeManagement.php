@@ -73,7 +73,7 @@
                     $totalRows = $rows['total'];
 
                     $currentPage = isset($_GET['currentPage']) ? $_GET['currentPage'] : 1;
-                    $limit = 10;
+                    $limit = 7;
 
                     $sizePage = 2;
                     $totalPage = ceil($totalRows / $limit);
