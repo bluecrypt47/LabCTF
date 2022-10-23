@@ -1,18 +1,3 @@
- <!-- Top bar Start -->
- <!-- <div class="top-bar">
-     <div class="container-fluid">
-         <div class="row">
-             <div class="col-sm-6">
-                 <i class="fa fa-envelope"></i> thanhhung041100@gmail.com
-             </div>
-             <div class="col-sm-6">
-                 <i class="fa fa-phone-alt"></i> +0783727238
-             </div>
-         </div>
-     </div>
- </div> -->
- <!-- Top bar End -->
-
  <!-- Nav Bar Start -->
  <!-- Nav Bar End -->
 
@@ -23,7 +8,7 @@
              <div class="col-md-2">
                  <div class="logo">
                      <a href="index.html">
-                         <h1>HHT</h1>
+                         <h1>HPT</h1>
                      </a>
                  </div>
              </div>

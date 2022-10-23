@@ -60,7 +60,7 @@
                         $description = trim($_POST['description']);
 
                         $imgName = $_FILES['image']['name'];
-                        $imagePath = "img/products/" . $imgName;
+                        $imagePath = "../../assets/img/products/" . $imgName;
                         $isUploaded = move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
 
                         if (!empty($nameProduct) && !empty($typeProduct) && !empty($price) && !empty($quantity) && !empty($unit)) {

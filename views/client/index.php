@@ -1,11 +1,10 @@
-<!-- <?php session_start() ?> -->
-<?php require 'D:\DVWA\ProjectCTF\controllers\connection\connectionDB.php'; ?>
+<?php require '../../controllers/connection/connectionDB.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>E Store - eCommerce HTML Template</title>
+    <title>Laptop Shop</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="eCommerce HTML Template Free Download" name="keywords">
     <meta content="eCommerce HTML Template Free Download" name="description">
@@ -40,133 +39,13 @@
     </div>
     <!-- Main Slider End -->
 
-    <!-- Brand Start -->
-    <div class="brand">
-        <div class="container-fluid">
-            <div class="brand-slider">
-                <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
-            </div>
-        </div>
-    </div>
-    <!-- Brand End -->
+    <?php
+    $sqlHL = "SELECT * FROM products WHERE highLight = 1";
+    $resultHL = mysqli_query($conn, $sqlHL);
 
-    <!-- Feature Start-->
-    <div class="feature">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-6 feature-col">
-                    <div class="feature-content">
-                        <i class="fab fa-cc-mastercard"></i>
-                        <h2>Thanh toán an toàn</h2>
-                        <p>
-                            Để bảo đảm an toàn khi thực hiện thanh toán mua hàng hóa, dịch vụ trực tuyến bằng thẻ/tài khoản ngân hàng qua Cổng thanh toán Napas.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 feature-col">
-                    <div class="feature-content">
-                        <i class="fa fa-truck"></i>
-                        <h2>Vẩn chuyển toàn nước</h2>
-                        <p>
-                            Với Dịch vụ giao hàng toàn quốc trong nước của HHT giúp quý khách gửi các món hàng từ Sài Gòn - Hà Nội trong thời gian nhanh nhất.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 feature-col">
-                    <div class="feature-content">
-                        <i class="fa fa-sync-alt"></i>
-                        <h2>Hoàn trả trong 7 ngày</h2>
-                        <p>
-                            Khi yêu cầu trả lại hoặc thay thế, yêu cầu phải được thực hiện và sản phẩm được trả lại trong vòng 7 ngày kể từ ngày mua.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 feature-col">
-                    <div class="feature-content">
-                        <i class="fa fa-comments"></i>
-                        <h2>Hỗ trợ 24/7</h2>
-                        <p>
-                            Với đường dây riêng, tự nhận diện Khách hàng ưu tiên, luôn sẵn sàng hỗ trợ Quý khách hàng mọi lúc mọi nơi: 1999 9999.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Feature End-->
-
-    <!-- Category Start-->
-    <div class="category">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="category-item ch-400">
-                        <img src="img/category-3.jpg" />
-                        <a class="category-name" href="">
-                            <p>Quần áo Nam Nữ</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="category-item ch-250">
-                        <img src="img/category-4.jpg" />
-                        <a class="category-name" href="">
-                            <p>Sản phẩm cây cọ chất lượng cao</p>
-                        </a>
-                    </div>
-                    <div class="category-item ch-150">
-                        <img src="img/category-5.jpg" />
-                        <a class="category-name" href="">
-                            <p>Phụ kiện thời trang cao cấp</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="category-item ch-150">
-                        <img src="img/category-6.jpg" />
-                        <a class="category-name" href="">
-                            <p> Mỹ phẩm chất lượng cao thì từ thiên</p>
-                        </a>
-                    </div>
-                    <div class="category-item ch-250">
-                        <img src="img/category-7.jpg" />
-                        <a class="category-name" href="">
-                            <p>Các phụ kiện điện tử chính hãng</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="category-item ch-400">
-                        <img src="img/category-8.jpg" />
-                        <a class="category-name" href="">
-                            <p>Đầm dạ hội thao phong cách <br> Châu Âu</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Category End-->
-
-    <!-- Call to Action Start -->
-    <div class="call-to-action">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h1>Hãy gọi cho chúng tôi khi bạn thắc mắc</h1>
-                </div>
-                <div class="col-md-6">
-                    <a href="tel:0783727238">+0783727238</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Call to Action End -->
+    $sqlNew = "SELECT * FROM products WHERE new = 1";
+    $resultNew = mysqli_query($conn, $sqlNew);
+    ?>
 
     <!-- Featured Product Start -->
     <div class="featured-product product">
@@ -175,168 +54,33 @@
                 <h1>Sản Phẩm Nổi Bật</h1>
             </div>
             <div class="row align-items-center product-slider product-slider-4">
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                <?php while ($row = mysqli_fetch_assoc($resultHL)) { ?>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#"><?php echo $row['nameProduct']; ?></a>
                             </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-1.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="<?php echo $row['imgProduct']; ?>" alt="Product Image" style="width:260px;height:250px;">
+                                </a>
+                                <div class=" product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
+                            <div class="product-price">
+                                <h8 style="color: #4287ee;"><?php echo number_format($row['price']); ?><span>₫</span></h8>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-2.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-3.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-4.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-5.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
+                <?php }  ?>
             </div>
         </div>
     </div>
     <!-- Featured Product End -->
-
-    <!-- Newsletter Start -->
-    <div class="newsletter">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Đăng Kí Bản Tin Của Chúng Tôi </h1>
-                </div>
-                <div class="col-md-6">
-                    <div class="form">
-                        <input type="email" value="Nhập Email của bạn...">
-                        <button>Gửi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Newsletter End -->
 
     <!-- Recent Product Start -->
     <div class="recent-product product">
@@ -345,146 +89,29 @@
                 <h1>Sản Phẩm Gần Đây</h1>
             </div>
             <div class="row align-items-center product-slider product-slider-4">
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                <?php while ($row = mysqli_fetch_assoc($resultNew)) { ?>
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div class="product-title">
+                                <a href="#"><?php echo $row['nameProduct']; ?></a>
                             </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-6.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
+                            <div class="product-image">
+                                <a href="product-detail.html">
+                                    <img src="<?php echo $row['imgProduct']; ?>" alt="Product Image" style="width:260px;height:250px;">
+                                </a>
+                                <div class=" product-action">
+                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a href="#"><i class="fa fa-search"></i></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
+                            <div class="product-price">
+                                <h8 style="color: #4287ee;"><?php echo number_format($row['price']); ?><span>₫</span></h8>
+                                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-7.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-8.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-9.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product-item">
-                        <div class="product-title">
-                            <a href="#">Product Name</a>
-                            <div class="ratting">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="product-image">
-                            <a href="product-detail.html">
-                                <img src="img/product-10.jpg" alt="Product Image">
-                            </a>
-                            <div class="product-action">
-                                <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                <a href="#"><i class="fa fa-heart"></i></a>
-                                <a href="#"><i class="fa fa-search"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-price">
-                            <h3>99<span>đ</span></h3>
-                            <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
-                        </div>
-                    </div>
-                </div>
+                <?php }  ?>
             </div>
         </div>
     </div>
